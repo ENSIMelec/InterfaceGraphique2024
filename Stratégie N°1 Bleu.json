@@ -17,7 +17,8 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit"
+        "methode": "bouger_panneau_droit",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -36,7 +37,8 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit"
+        "methode": "bouger_panneau_droit",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -55,7 +57,8 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit"
+        "methode": "bouger_panneau_droit",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -74,15 +77,18 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "initialize_motors"
+        "methode": "initialize_motors",
+        "argument": []
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "initialize_motors"
+        "methode": "initialize_motors",
+        "argument": []
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -94,7 +100,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince"
+        "methode": "close_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -106,7 +113,8 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "elevate"
+        "methode": "elevate",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -118,11 +126,13 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower_for_plant"
+        "methode": "lower_for_plant",
+        "argument": []
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince_stepbystep"
+        "methode": "open_pince_stepbystep",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -141,7 +151,8 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower"
+        "methode": "lower",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -153,7 +164,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -165,7 +177,8 @@
     }
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince"
+        "methode": "close_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -177,7 +190,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -189,11 +203,13 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower"
+        "methode": "lower",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -205,7 +221,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince"
+        "methode": "close_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -217,7 +234,8 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "elevate"
+        "methode": "elevate",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -229,11 +247,13 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower_for_plant"
+        "methode": "lower_for_plant",
+        "argument": []
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince_stepbystep"
+        "methode": "open_pince_stepbystep",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -252,7 +272,8 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower"
+        "methode": "lower",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -264,7 +285,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -276,7 +298,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince"
+        "methode": "close_pince",
+        "argument": []
     },
     {
         "classe": "Asserv",
@@ -288,7 +311,8 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince"
+        "methode": "open_pince",
+        "argument": []
     },
     {
         "classe": "ComptagePoints",
@@ -307,7 +331,8 @@
     },
     {
         "classe": "ComptagePoints",
-        "methode": "pts_zone_finale"
+        "methode": "pts_zone_finale",
+        "argument": []
     }
 }
 ]
