@@ -20,23 +20,23 @@
         "methode": "goto",
         "argument": [
             "300",
-            "10"
+            "150"
         ]    
     },
     {
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "380",
-            "10"
+            "680",
+            "150"
         ]    
     },
     {
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "380",
-            "10"
+            "680",
+            "300"
         ]    
     },
     {
@@ -58,8 +58,8 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "680",
+            "450"
         ]    
     },
     {
@@ -71,16 +71,16 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "350",
+            "450"
         ]    
     },
     {
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "350",
+            "700"
         ]    
     },
     {
@@ -92,8 +92,8 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "350",
+            "770"
         ]    
     },
     {
@@ -117,8 +117,8 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "350",
+            "650"
         ]   
     },
     {
@@ -130,16 +130,16 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "350",
+            "700"
         ]    
     },
     {
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "600",
+            "700"
         ]    
     },
     {
@@ -151,8 +151,8 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "700",
+            "700"
         ]    
     }
     {
@@ -164,16 +164,16 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "700",
+            "1550"
         ]     
     },
     {
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
+            "0",
+            "1550"
         ]     
     },
     {
@@ -192,24 +192,8 @@
         "classe": "Asserv",
         "methode": "goto",
         "argument": [
-            "1",
-            "2"
-        ]     
-    },
-    {
-        "classe": "Asserv",
-        "methode": "goto",
-        "argument": [
-            "1",
-            "2"
-        ]     
-    },
-    {
-        "classe": "Asserv",
-        "methode": "goto",
-        "argument": [
-            "1",
-            "2"
+            "300",
+            "1550"
         ]     
     },
     {
