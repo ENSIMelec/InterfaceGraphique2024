@@ -1,0 +1,221 @@
+#BLEU
+[
+ {    "initialisation": [
+    "AX12_Ascenseur",
+    "AX12_Pinces",
+    "AX12_Panneau",
+    "Comptage_Point",
+    "Asserv"
+  ] 
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "300",
+            "0"
+        ]    
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "300",
+            "10"
+        ]    
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "380",
+            "10"
+        ]    
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "380",
+            "10"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "initialize_motors",
+        "argument": []
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "initialize_motors",
+        "argument": []
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "elevate",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower_for_plant",
+        "argument": []
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince_stepbystep",
+        "argument": []
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "ppts_plante_jardiniere",
+        "argument": [
+            "5",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]   
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    }
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince",
+        "argument": []
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+        "argument": []
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_plante_violet_zone",
+        "argument": [
+            "2",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "Asserv",
+        "methode": "goto",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_zone_finale",
+        "argument": []
+    }
+}
+]
