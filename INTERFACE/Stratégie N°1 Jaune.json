@@ -1,0 +1,314 @@
+#BLEU
+[
+ {    "initialisation": [
+    "AX12_Ascenseur",
+    "AX12_Pinces",
+    "AX12_Panneau",
+    "AX12_Prendre_Plantes",
+    "Comptage_Point",
+    "Asserv"
+  ] 
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Panneau",
+        "methode": "bouger_panneau_gauche",
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_panneau_solaire",
+        "argument": [
+            "1",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Panneau",
+        "methode": "bouger_panneau_gauche",
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_panneau_solaire",
+        "argument": [
+            "1",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Panneau",
+        "methode": "bouger_panneau_gauche",
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_panneau_solaire",
+        "argument": [
+            "1",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]  
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "initialize_motors",
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "initialize_motors",
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "elevate",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower_for_plant"
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince_stepbystep"
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "ppts_plante_jardiniere",
+        "argument": [
+            "5",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]   
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    }
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince"
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower",
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "elevate"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower_for_plant"
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince_stepbystep"
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "ppts_plante_jardiniere",
+        "argument": [
+            "5",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Ascenseur",
+        "methode": "lower"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "close_pince"
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]    
+    },
+    {
+        "classe": "AX12_Pinces",
+        "methode": "open_pince"
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_plante_violet_zone",
+        "argument": [
+            "2",
+        ]
+    },
+    {
+        "classe": "Asserv",
+        "methode": "Moove",
+        "argument": [
+            "1",
+            "2"
+        ]     
+    },
+    {
+        "classe": "ComptagePoints",
+        "methode": "pts_zone_finale",
+    }
+}
+]
