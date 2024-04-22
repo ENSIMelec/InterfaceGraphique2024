@@ -92,8 +92,6 @@ class StrategySelectionPage(tk.Frame):
         json_filename = f"Stratégie N°{strategy_number} {self.team}.json"
         # Copie du fichier JSON dans le dossier STRATEGIE
         shutil.copy(json_filename, "STRATEGIE")
-        # Renommage du fichier copié
-        os.rename(os.path.join("STRATEGIE", json_filename), os.path.join("STRATEGIE", "STRATEGIE.json"))
         self.pack_forget()
         self.show_steps_selection(strategy_number)
 
@@ -155,7 +153,7 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page = StrategySelectionPage(self, team, self.return_to_team_selection, self.show_steps_selection)
 
     def return_to_team_selection(self):
-        # Suppression du dossier STRATEGIE et son contenu
+        # Suppression du fichier JSON copié dans le dossier STRATEGIE
         if os.path.exists("STRATEGIE"):
             shutil.rmtree("STRATEGIE")
         self.strategy_selection_page.destroy()
