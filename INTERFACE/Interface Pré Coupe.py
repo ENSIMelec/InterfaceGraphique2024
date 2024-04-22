@@ -90,8 +90,8 @@ class StrategySelectionPage(tk.Frame):
 
     def on_strategy_selected(self, strategy_number):
         json_filename = f"Stratégie N°{strategy_number} {self.team}.json"
-        # Copie du fichier JSON dans le dossier DOSSIER
-        shutil.copy(json_filename, "STRATEGIE/STRATEGIE")
+        # Copie du fichier JSON dans le dossier STRATEGIE
+        shutil.copy(json_filename, "STRATEGIE")
         self.pack_forget()
         self.show_steps_selection(strategy_number)
 
@@ -139,8 +139,6 @@ class StepsSelectionPage(tk.Frame):
         self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 28), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
         self.return_button.place(relx=0.78, rely=0.17, anchor="center")
 
-            
-
 class MainApplication(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -150,16 +148,14 @@ class MainApplication(tk.Tk):
 
         self.team_selection_page = TeamSelectionPage(self, self.on_team_selected)
 
-    # Le reste de votre code reste inchangé
-
     def on_team_selected(self, team):
         self.team_selection_page.pack_forget()
         self.strategy_selection_page = StrategySelectionPage(self, team, self.return_to_team_selection, self.show_steps_selection)
 
     def return_to_team_selection(self):
-        # Écrasement du fichier JSON copié dans le dossier DOSSIER
-        if os.path.exists("STRATEGIE/STRATEGIE"):
-            os.remove("STRATEGIE/STRATEGIE")
+        # Suppression du fichier JSON copié dans le dossier STRATEGIE
+        if os.path.exists("STRATEGIE"):
+            shutil.rmtree("STRATEGIE")
         self.strategy_selection_page.destroy()
         self.team_selection_page.pack(fill=tk.BOTH, expand=True)
 
@@ -168,9 +164,9 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page.pack_forget()
 
     def return_to_strategy_selection(self):
-        # Écrasement du fichier JSON copié dans le dossier DOSSIER
-        if os.path.exists("STRATEGIE/STRATEGIE"):
-            os.remove("STRATEGIE/STRATEGIE")
+        # Suppression du dossier STRATEGIE et son contenu
+        if os.path.exists("STRATEGIE"):
+            shutil.rmtree("STRATEGIE")
         self.steps_selection_page.destroy()
         self.strategy_selection_page.pack(fill=tk.BOTH, expand=True)
 
