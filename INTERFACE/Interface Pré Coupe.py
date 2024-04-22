@@ -45,7 +45,7 @@ class StrategySelectionPage(tk.Frame):
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
-        self.frame_with_image = tk.Frame(self, bg="black", width=1980, height=1080, bd=2, relief="groove")  # Fond blanc
+        self.frame_with_image = tk.Frame(self, bg="black", bd=2, relief="groove")  # Fond blanc
         self.frame_with_image.pack(fill=tk.BOTH, expand=True)
 
         # Affichage de l'image en arrière-plan
@@ -113,7 +113,7 @@ class StepsSelectionPage(tk.Frame):
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
-        self.frame_with_image = tk.Frame(self, bg="black", width=1980, height=1080, bd=2, relief="groove")  # Fond blanc
+        self.frame_with_image = tk.Frame(self, bg="black", bd=2, relief="groove")  # Fond blanc
         self.frame_with_image.pack(fill=tk.BOTH, expand=True)
 
         # Affichage de l'image en arrière-plan
@@ -146,7 +146,14 @@ class MainApplication(tk.Tk):
         super().__init__()
 
         self.title("Interface Graphique")
-        self.attributes('-fullscreen', True)  # Lancement en plein écran
+        self.configure(background='white')
+
+        # Détermination des dimensions de l'écran
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+
+        # Lancement en plein écran avec les dimensions de l'écran
+        self.geometry("%dx%d+0+0" % (screen_width, screen_height))
 
         self.team_selection_page = TeamSelectionPage(self, self.on_team_selected)
 
