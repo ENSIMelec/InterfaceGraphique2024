@@ -108,7 +108,7 @@ class StrategySelectionPage(tk.Frame):
     def on_strategy_selected(self, strategy_number):
         json_filename = f"Stratégie N°{strategy_number} {self.team}.json"
         # Copie du fichier JSON dans le dossier STRATEGIE
-        shutil.copy(json_filename, "STRATEGIE")
+        shutil.copy(json_filename, "STRATEGIE/STRATEGIE.json")
         self.pack_forget()
         self.show_steps_selection(strategy_number)
 
