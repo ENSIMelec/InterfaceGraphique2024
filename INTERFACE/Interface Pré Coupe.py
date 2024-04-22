@@ -40,7 +40,8 @@ class StrategySelectionPage(tk.Frame):
         self.pack(fill=tk.BOTH, expand=True)
 
         # Chargement de l'image
-        image_path = "vinyle_table_2024_FINAL_v1.png"
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(script_dir, "vinyle_table_2024_FINAL_v1.png")
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
@@ -52,21 +53,22 @@ class StrategySelectionPage(tk.Frame):
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Création du cadre pour les boutons
-        self.frame_with_buttons = tk.Frame(self.frame_with_image, bg="#000080", bd=2, relief="groove")  # Bleu marine
+        self.frame_with_buttons = tk.Frame(self.frame_with_image, bd=2, relief="groove")  # Bleu marine
         if self.team == "Jaune":
+            self.frame_with_buttons.configure(bg="#FFFF99")
             self.frame_with_buttons.place(relx=0.05, rely=0.2, relwidth=0.4, relheight=0.7)
             button_color = "#FFFF99"  # Jaune clair
             return_button_side = "right"
             selected_button_color = "#FFD700"  # Jaune foncé
         elif self.team == "Bleue":
+            self.frame_with_buttons.configure(bg="#000080")
             self.frame_with_buttons.place(relx=0.55, rely=0.2, relwidth=0.4, relheight=0.7)
             button_color = "#99CCFF"  # Bleu pastel
             return_button_side = "left"
             selected_button_color = "#00008B"  # Bleu foncé
 
         # Création du titre de l'équipe sélectionnée
-        team_color = "#FFFF99" if self.team == "Jaune" else "#99CCFF"
-        self.team_title_label = tk.Label(self.frame_with_buttons, text=self.team, font=("Helvetica", 36, "bold"), bg=team_color)
+        self.team_title_label = tk.Label(self.frame_with_buttons, text=self.team, font=("Helvetica", 36, "bold"), bg=button_color)
         self.team_title_label.pack(fill=tk.BOTH, padx=20, pady=10)
 
         # Création des boutons de sélection de stratégie
@@ -104,7 +106,8 @@ class StepsSelectionPage(tk.Frame):
         self.pack(fill=tk.BOTH, expand=True)
 
         # Chargement de l'image
-        image_path = "fond_ENSIMelec.png"
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(script_dir, "fond_ENSIMelec.png")
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
