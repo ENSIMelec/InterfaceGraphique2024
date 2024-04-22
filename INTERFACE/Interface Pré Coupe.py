@@ -1,11 +1,6 @@
 import tkinter as tk
 import os
 import shutil
-# Dynamic font size adjustment based on window dimensions
-def get_font_size(width, height, base_size=20):
-    # Calculate size based on smaller dimension
-    size = int(min(width, height) / 800 * base_size)
-    return max(size, 12)  # Minimum font size of 12
 
 class TeamSelectionPage(tk.Frame):
     def __init__(self, parent, on_team_selected):
@@ -16,35 +11,23 @@ class TeamSelectionPage(tk.Frame):
         self.configure(bg="white")
         self.pack(fill=tk.BOTH, expand=True)
 
-        # Set grid weight to make the layout responsive
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=1)
-
-        # Dynamic frames using relative sizes
-        self.left_frame = tk.Frame(self, bg="#FFFF99", bd=2, relief="groove")  # Equipe Jaune
+        # Création de la fenêtre principale
+        self.left_frame = tk.Frame(self, bg="#FFFF99", width=990, height=1080, bd=2, relief="groove")  # Equipe Jaune
         self.left_frame.grid(row=0, column=0, sticky="nsew")
 
-        self.right_frame = tk.Frame(self, bg="#000080", bd=2, relief="groove")  # Equipe Bleue
+        self.right_frame = tk.Frame(self, bg="#000080", width=990, height=1080, bd=2, relief="groove")  # Equipe Bleue
         self.right_frame.grid(row=0, column=1, sticky="nsew")
 
-        # Dynamic font size and button placement
-        font_size = get_font_size(self.winfo_width(), self.winfo_height())
-        self.yellow_team_button = tk.Button(self.left_frame, text="Equipe Jaune",
-                                            font=("Helvetica", font_size, "bold"),
-                                            command=lambda: self.select_team("Jaune"),
-                                            bd=2, relief="groove")
+        # Création des boutons pour la sélection de l'équipe
+        self.yellow_team_button = tk.Button(self.left_frame, text="Equipe Jaune", font=("Helvetica", 40, "bold"), command=lambda: self.select_team("Jaune"), bd=2, relief="groove")
         self.yellow_team_button.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.blue_team_button = tk.Button(self.right_frame, text="Equipe Bleue",
-                                          font=("Helvetica", font_size, "bold"),
-                                          command=lambda: self.select_team("Bleue"),
-                                          bd=2, relief="groove")
+        self.blue_team_button = tk.Button(self.right_frame, text="Equipe Bleue", font=("Helvetica", 40, "bold"), command=lambda: self.select_team("Bleue"), bd=2, relief="groove")
         self.blue_team_button.place(relx=0.5, rely=0.5, anchor="center")
 
     def select_team(self, team):
         self.on_team_selected(team)
-        
+
 class StrategySelectionPage(tk.Frame):
     def __init__(self, parent, team, return_callback, show_steps_selection):
         super().__init__(parent)
@@ -109,6 +92,8 @@ class StrategySelectionPage(tk.Frame):
         json_filename = f"Stratégie N°{strategy_number} {self.team}.json"
         # Copie du fichier JSON dans le dossier STRATEGIE
         shutil.copy(json_filename, "STRATEGIE")
+        # Renommage du fichier copié
+        os.rename(os.path.join("STRATEGIE", json_filename), os.path.join("STRATEGIE", "STRATEGIE.json"))
         self.pack_forget()
         self.show_steps_selection(strategy_number)
 
@@ -170,7 +155,7 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page = StrategySelectionPage(self, team, self.return_to_team_selection, self.show_steps_selection)
 
     def return_to_team_selection(self):
-        # Suppression du fichier JSON copié dans le dossier STRATEGIE
+        # Suppression du dossier STRATEGIE et son contenu
         if os.path.exists("STRATEGIE"):
             shutil.rmtree("STRATEGIE")
         self.strategy_selection_page.destroy()
