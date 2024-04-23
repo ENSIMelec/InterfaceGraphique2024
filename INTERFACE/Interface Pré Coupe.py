@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 import shutil
+
 # Dynamic font size adjustment based on window dimensions
 def get_font_size(width, height, base_size=20):
     # Calculate size based on smaller dimension
@@ -62,7 +63,7 @@ class StrategySelectionPage(tk.Frame):
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
-        self.frame_with_image = tk.Frame(self, bg="black", width=1980, height=1080, bd=2, relief="groove")  # Fond blanc
+        self.frame_with_image = tk.Frame(self, bg="black", width=800, height=480, bd=2, relief="groove")  # Fond blanc
         self.frame_with_image.pack(fill=tk.BOTH, expand=True)
 
         # Affichage de l'image en arrière-plan
@@ -85,24 +86,24 @@ class StrategySelectionPage(tk.Frame):
             selected_button_color = "#00008B"  # Bleu foncé
 
         # Création du titre de l'équipe sélectionnée
-        self.team_title_label = tk.Label(self.frame_with_buttons, text=self.team, font=("Helvetica", 36, "bold"), bg=button_color)
-        self.team_title_label.pack(fill=tk.BOTH, padx=20, pady=10)
+        self.team_title_label = tk.Label(self.frame_with_buttons, text=self.team, font=("Helvetica", 30, "bold"), bg=button_color)
+        self.team_title_label.pack(fill=tk.BOTH, padx=15, pady=7)
 
         # Création des boutons de sélection de stratégie
         self.buttons = []
         for i in range(1, 5):
             button_text = f"Stratégie N°{i}"
             if self.team == "Jaune" and i == 1:
-                button_text = "Stratégie N°1 (MODIFIÉE)"
+                button_text = "Stratégie N°1"
             elif self.team == "Bleue" and i == 1:
-                button_text = "Stratégie N°1 (MODIFIÉE)"
-            button = tk.Button(self.frame_with_buttons, text=button_text, font=("Helvetica", 24, "bold"), command=lambda strategy_number=i: self.on_strategy_selected(strategy_number), bd=2, relief="groove")
+                button_text = "Stratégie N°1"
+            button = tk.Button(self.frame_with_buttons, text=button_text, font=("Helvetica", 15, "bold"), command=lambda strategy_number=i: self.on_strategy_selected(strategy_number), bd=2, relief="groove")
             button.configure(bg=button_color)  # Pas de bordure
-            button.pack(fill="both", expand=True, padx=20, pady=10)
+            button.pack(fill="both", expand=True, padx=20, pady=5)
             self.buttons.append(button)
 
         # Création du bouton de retour à la page de sélection d'équipe
-        self.return_button = tk.Button(self.frame_with_buttons, text="Retour à la sélection d'équipe", font=("Helvetica", 24), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
+        self.return_button = tk.Button(self.frame_with_buttons, text="Retour à la sélection d'équipe", font=("Helvetica", 15), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
         self.return_button.pack(side=return_button_side, fill=tk.BOTH, padx=20, pady=10)
 
     def on_strategy_selected(self, strategy_number):
@@ -128,7 +129,7 @@ class StepsSelectionPage(tk.Frame):
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
-        self.frame_with_image = tk.Frame(self, bg="black", width=1980, height=1080, bd=2, relief="groove")  # Fond blanc
+        self.frame_with_image = tk.Frame(self, bg="black", width=800, height=480, bd=2, relief="groove")  # Fond blanc
         self.frame_with_image.pack(fill=tk.BOTH, expand=True)
 
         # Affichage de l'image en arrière-plan
@@ -137,10 +138,10 @@ class StepsSelectionPage(tk.Frame):
 
         # Création du bloc pour le nombre de points
         self.points_block = tk.Frame(self.frame_with_image, bg="#7AC5CD", bd=2, relief="groove")  # Rouge pâle
-        self.points_block.place(relx=0.425, rely=0.21, relwidth=0.15, relheight=0.28)
+        self.points_block.place(relx=0.425, rely=0.2325, relwidth=0.15, relheight=0.26)
 
         # Titre du bloc
-        self.points_label = tk.Label(self.points_block, text="Points", font=("Helvetica", 60, "bold"), bg="#FCFCFC")
+        self.points_label = tk.Label(self.points_block, text="Points", font=("Helvetica", 23, "bold"), bg="#FCFCFC")
         self.points_label.pack(fill=tk.BOTH, padx=10, pady=5)
 
         # Variable pour stocker le nombre de points
@@ -149,12 +150,12 @@ class StepsSelectionPage(tk.Frame):
         self.points_counter_value.set(str(points_mapping.get(strategy_number, 0)))  # Initialisation à 0
 
         # Compteur initialisé à 0
-        self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 150), bg="#FCFCFC")
+        self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 50), bg="#FCFCFC")
         self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
 
         # Création du bouton de retour à la page de sélection de stratégie
-        self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 28), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
-        self.return_button.place(relx=0.78, rely=0.17, anchor="center")
+        self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 13), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
+        self.return_button.place(relx=0.78, rely=0.19, anchor="center")
 
 class MainApplication(tk.Tk):
     def __init__(self):
@@ -171,8 +172,8 @@ class MainApplication(tk.Tk):
 
     def return_to_team_selection(self):
         # Suppression du fichier JSON copié dans le dossier STRATEGIE
-        if os.path.exists("STRATEGIE"):
-            shutil.rmtree("STRATEGIE")
+        if os.path.exists("STRATEGIE/STRATEGIE.json"):  # Vérifier si le fichier existe
+            os.remove("STRATEGIE/STRATEGIE.json")  # Supprimer le fichier
         self.strategy_selection_page.destroy()
         self.team_selection_page.pack(fill=tk.BOTH, expand=True)
 
@@ -181,9 +182,7 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page.pack_forget()
 
     def return_to_strategy_selection(self):
-        # Suppression du dossier STRATEGIE et son contenu
-        if os.path.exists("STRATEGIE"):
-            shutil.rmtree("STRATEGIE")
+        # Ne rien faire ici car nous ne voulons pas supprimer STRATEGIE.json
         self.steps_selection_page.destroy()
         self.strategy_selection_page.pack(fill=tk.BOTH, expand=True)
 
