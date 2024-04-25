@@ -156,16 +156,16 @@ class StepsSelectionPage(tk.Frame):
         self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
 
         # Création du bouton GO pour exécuter le programme
-        self.go_button = tk.Button(self.frame_with_image, text="GO", font=("Helvetica", 20), bg="#7FFF00", command=self.run_program, bd=2, relief="groove")
-        self.go_button.place(relx=0.8, rely=0.28, anchor="center")
+        self.go_button = tk.Button(self.frame_with_image, text="GO", font=("Helvetica", 30), bg="#BCEE68", command=self.run_program, bd=2, relief="groove")
+        self.go_button.place(relx=0.82, rely=0.20, anchor="center")
 
         # Création du bouton STOP pour fermer le programme
-        self.stop_button = tk.Button(self.frame_with_image, text="STOP", font=("Helvetica", 13), bg="#FF6347", command=self.stop_program, bd=2, relief="groove")
-        self.stop_button.place(relx=0.8, rely=0.37, anchor="center")
+        self.stop_button = tk.Button(self.frame_with_image, text="STOP", font=("Helvetica", 17), bg="#FF6347", command=self.stop_program, bd=2, relief="groove")
+        self.stop_button.place(relx=0.82, rely=0.36, anchor="center")
 
         # Création de l'indicateur visuel de l'état d'exécution
-        self.status_indicator = tk.Label(self.frame_with_image, text="Programme arrêté", font=("Helvetica", 20), bg="red", fg="white")
-        self.status_indicator.place(relx=0.8, rely=0.45, anchor="center")
+        self.status_indicator = tk.Label(self.frame_with_image, text="Programme arrêté", font=("Helvetica", 20), bg="red", fg="black")
+        self.status_indicator.place(relx=0.82, rely=0.48, anchor="center")
 
         # Création du bouton de retour à la page de sélection de stratégie
         self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 13), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
@@ -176,7 +176,7 @@ class StepsSelectionPage(tk.Frame):
             # Exécute le programme externe (vous devez spécifier le chemin d'accès correct)
             subprocess.Popen(["python", "E:\ENSIM'elec\InterfaceGraphique2024\EDITEUR STRAT\Editeur_de_Strategie.py"])
             self.program_running = True
-            self.status_indicator.config(text="Programme en cours", bg="green")
+            self.status_indicator.config(text="Programme en cours", bg="#BCEE68")
 
     def stop_program(self):
         if self.program_running:
