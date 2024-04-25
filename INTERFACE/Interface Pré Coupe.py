@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 import shutil
+import subprocess
 
 # Dynamic font size adjustment based on window dimensions
 def get_font_size(width, height, base_size=20):
@@ -119,6 +120,7 @@ class StepsSelectionPage(tk.Frame):
 
         self.strategy_number = strategy_number
         self.return_callback = return_callback
+        self.program_running = False  # Indicateur pour suivre l'état d'exécution du programme
 
         self.configure(bg="white")
         self.pack(fill=tk.BOTH, expand=True)
@@ -153,9 +155,37 @@ class StepsSelectionPage(tk.Frame):
         self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 50), bg="#FCFCFC")
         self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
 
+        # Création du bouton GO pour exécuter le programme
+        self.go_button = tk.Button(self.frame_with_image, text="GO", font=("Helvetica", 20), bg="#7FFF00", command=self.run_program, bd=2, relief="groove")
+        self.go_button.place(relx=0.8, rely=0.28, anchor="center")
+
+        # Création du bouton STOP pour fermer le programme
+        self.stop_button = tk.Button(self.frame_with_image, text="STOP", font=("Helvetica", 13), bg="#FF6347", command=self.stop_program, bd=2, relief="groove")
+        self.stop_button.place(relx=0.8, rely=0.37, anchor="center")
+
+        # Création de l'indicateur visuel de l'état d'exécution
+        self.status_indicator = tk.Label(self.frame_with_image, text="Programme arrêté", font=("Helvetica", 20), bg="red", fg="white")
+        self.status_indicator.place(relx=0.8, rely=0.45, anchor="center")
+
         # Création du bouton de retour à la page de sélection de stratégie
         self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 13), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
-        self.return_button.place(relx=0.78, rely=0.19, anchor="center")
+        self.return_button.place(relx=0.22, rely=0.36, anchor="center")
+
+    def run_program(self):
+        if not self.program_running:
+            # Exécute le programme externe (vous devez spécifier le chemin d'accès correct)
+            subprocess.Popen(["python", "E:\ENSIM'elec\InterfaceGraphique2024\EDITEUR STRAT\Editeur_de_Strategie.py"])
+            self.program_running = True
+            self.status_indicator.config(text="Programme en cours", bg="green")
+
+    def stop_program(self):
+        if self.program_running:
+            # Arrête le programme externe
+            # Ici, vous devez implémenter la logique pour arrêter le programme en cours d'exécution.
+            # Cela peut nécessiter une communication spécifique avec le programme en cours d'exécution.
+            # Vous pouvez remplacer cette logique par celle adaptée à votre programme.
+            self.program_running = False
+            self.status_indicator.config(text="Programme arrêté", bg="red")
 
 class MainApplication(tk.Tk):
     def __init__(self):
@@ -171,9 +201,6 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page = StrategySelectionPage(self, team, self.return_to_team_selection, self.show_steps_selection)
 
     def return_to_team_selection(self):
-        # Suppression du fichier JSON copié dans le dossier STRATEGIE
-        if os.path.exists("STRATEGIE/STRATEGIE.json"):  # Vérifier si le fichier existe
-            os.remove("STRATEGIE/STRATEGIE.json")  # Supprimer le fichier
         self.strategy_selection_page.destroy()
         self.team_selection_page.pack(fill=tk.BOTH, expand=True)
 
@@ -182,7 +209,9 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page.pack_forget()
 
     def return_to_strategy_selection(self):
-        # Ne rien faire ici car nous ne voulons pas supprimer STRATEGIE.json
+        # Suppression du fichier JSON copié dans le dossier STRATEGIE
+        if os.path.exists("STRATEGIE/STRATEGIE.json"):  # Vérifier si le fichier existe
+            os.remove("STRATEGIE/STRATEGIE.json")  # Supprimer le fichier
         self.steps_selection_page.destroy()
         self.strategy_selection_page.pack(fill=tk.BOTH, expand=True)
 
