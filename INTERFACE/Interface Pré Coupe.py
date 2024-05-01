@@ -3,6 +3,9 @@ import os
 import shutil
 import subprocess
 
+import logging
+import logging.config
+
 # Dynamic font size adjustment based on window dimensions
 def get_font_size(width, height, base_size=20):
     # Calculate size based on smaller dimension
@@ -11,7 +14,10 @@ def get_font_size(width, height, base_size=20):
 
 class TeamSelectionPage(tk.Frame):
     def __init__(self, parent, on_team_selected):
+        
         super().__init__(parent)
+
+        self.logger = parent.logger
 
         self.on_team_selected = on_team_selected
 
@@ -44,12 +50,17 @@ class TeamSelectionPage(tk.Frame):
                                           bd=2, relief="groove")
         self.blue_team_button.place(relx=0.5, rely=0.5, anchor="center")
 
+        self.logger.info("Fin intitialisation TeamSelectionPage")
+
     def select_team(self, team):
+        self.logger.info(f"Equipe sélectionnée: {team}")  
         self.on_team_selected(team)
 
 class StrategySelectionPage(tk.Frame):
     def __init__(self, parent, team, return_callback, show_steps_selection):
         super().__init__(parent)
+        
+        self.logger = parent.logger
 
         self.team = team
         self.return_callback = return_callback
@@ -60,7 +71,7 @@ class StrategySelectionPage(tk.Frame):
 
         # Chargement de l'image
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(script_dir, "vinyle_table_2024_FINAL_v1.png")
+        image_path = os.path.join(script_dir, "/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/vinyle_table_2024_FINAL_v1.png")
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
@@ -103,20 +114,27 @@ class StrategySelectionPage(tk.Frame):
             button.pack(fill="both", expand=True, padx=20, pady=5)
             self.buttons.append(button)
 
-        # Création du bouton de retour à la page de sélection d'équipe
+        # Création du bouton de retour à la page de sélection d'équipe  
         self.return_button = tk.Button(self.frame_with_buttons, text="Retour à la sélection d'équipe", font=("Helvetica", 15), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
-        self.return_button.pack(side=return_button_side, fill=tk.BOTH, padx=20, pady=10)
+        # self.return_button.place(relx=0.22, rely=0.36, anchor="center")
+        # self.return_button.pack(side=return_button_side, fill=tk.BOTH, padx=20, pady=10)
+        self.return_button.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        
+        self.logger.info("Fin initialisation StrategySelectionPage")
 
     def on_strategy_selected(self, strategy_number):
-        json_filename = f"Stratégie N°{strategy_number} {self.team}.json"
+        json_filename = f"/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/Stratégie N°{strategy_number} {self.team}.json"
+        self.logger.info(f"Stratégie sélectionnée: {json_filename} en couleur {self.team}")
         # Copie du fichier JSON dans le dossier STRATEGIE
-        shutil.copy(json_filename, "STRATEGIE/STRATEGIE.json")
+        shutil.copy(json_filename, "/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/STRATEGIE/STRATEGIE.json")
         self.pack_forget()
         self.show_steps_selection(strategy_number)
 
 class StepsSelectionPage(tk.Frame):
     def __init__(self, parent, strategy_number, return_callback):
         super().__init__(parent)
+        
+        self.logger = parent.logger
 
         self.strategy_number = strategy_number
         self.return_callback = return_callback
@@ -127,7 +145,7 @@ class StepsSelectionPage(tk.Frame):
 
         # Chargement de l'image
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(script_dir, "fond_ENSIMelec.png")
+        image_path = os.path.join(script_dir, "/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/fond_ENSIMelec.png")
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
@@ -171,6 +189,8 @@ class StepsSelectionPage(tk.Frame):
         self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 13), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
         self.return_button.place(relx=0.22, rely=0.36, anchor="center")
 
+        self.logger.info("Fin initialisation StepsSelectionPage")
+
     def run_program(self):
         if not self.program_running:
             # Exécute le programme externe (vous devez spécifier le chemin d'accès correct)
@@ -189,18 +209,26 @@ class StepsSelectionPage(tk.Frame):
 
 class MainApplication(tk.Tk):
     def __init__(self):
+        # Charger la configuration de logging
+        logging.config.fileConfig('/home/pi/code_principal_2024/logs.conf')
+
+        # Créer un logger
+        self.logger = logging.getLogger(__name__)
         super().__init__()
 
         self.title("Interface Graphique")
-        self.attributes('-fullscreen', True)  # Lancement en plein écran
-
+        self.geometry("800x480")
+        self.after(1000, lambda: self.wm_attributes('-fullscreen', 'true'))
+        self.logger.info("Début initialisation TeamSelectionPage")
         self.team_selection_page = TeamSelectionPage(self, self.on_team_selected)
+        self.logger.info("Fin initialisation MainApplication")
 
     def on_team_selected(self, team):
         self.team_selection_page.pack_forget()
         self.strategy_selection_page = StrategySelectionPage(self, team, self.return_to_team_selection, self.show_steps_selection)
 
     def return_to_team_selection(self):
+        self.logger.info("Retour à la sélection d'équipe")
         self.strategy_selection_page.destroy()
         self.team_selection_page.pack(fill=tk.BOTH, expand=True)
 
@@ -209,9 +237,10 @@ class MainApplication(tk.Tk):
         self.strategy_selection_page.pack_forget()
 
     def return_to_strategy_selection(self):
+        self.logger.info("Retour à la sélection de stratégie")
         # Suppression du fichier JSON copié dans le dossier STRATEGIE
-        if os.path.exists("STRATEGIE/STRATEGIE.json"):  # Vérifier si le fichier existe
-            os.remove("STRATEGIE/STRATEGIE.json")  # Supprimer le fichier
+        if os.path.exists("/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/STRATEGIE/STRATEGIE.json"):  # Vérifier si le fichier existe
+            os.remove("/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/STRATEGIE/STRATEGIE.json")  # Supprimer le fichier
         self.steps_selection_page.destroy()
         self.strategy_selection_page.pack(fill=tk.BOTH, expand=True)
 

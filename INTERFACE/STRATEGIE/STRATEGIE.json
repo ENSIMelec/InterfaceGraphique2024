@@ -4,12 +4,13 @@
     "AX12_Ascenseur",
     "AX12_Pinces",
     "AX12_Panneau",
+    "AX12_Prendre_Plantes",
     "Comptage_Point",
     "Asserv"
   ] 
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -17,8 +18,7 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit",
-        "argument": []
+        "methode": "bouger_panneau_gauche",
     },
     {
         "classe": "ComptagePoints",
@@ -29,7 +29,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -37,8 +37,7 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit",
-        "argument": []
+        "methode": "bouger_panneau_gauche",
     },
     {
         "classe": "ComptagePoints",
@@ -49,7 +48,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -57,8 +56,7 @@
     },
     {
         "classe": "AX12_Panneau",
-        "methode": "bouger_panneau_droit",
-        "argument": []
+        "methode": "bouger_panneau_gauche",
     },
     {
         "classe": "ComptagePoints",
@@ -69,7 +67,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -78,21 +76,18 @@
     {
         "classe": "AX12_Ascenseur",
         "methode": "initialize_motors",
-        "argument": []
     },
     {
         "classe": "AX12_Pinces",
         "methode": "initialize_motors",
-        "argument": []
     },
     {
         "classe": "AX12_Pinces",
         "methode": "open_pince",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -101,11 +96,10 @@
     {
         "classe": "AX12_Pinces",
         "methode": "close_pince",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -114,11 +108,10 @@
     {
         "classe": "AX12_Ascenseur",
         "methode": "elevate",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -126,13 +119,11 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower_for_plant",
-        "argument": []
+        "methode": "lower_for_plant"
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince_stepbystep",
-        "argument": []
+        "methode": "open_pince_stepbystep"
     },
     {
         "classe": "ComptagePoints",
@@ -143,7 +134,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -151,12 +142,11 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower",
-        "argument": []
+        "methode": "lower"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -165,11 +155,10 @@
     {
         "classe": "AX12_Pinces",
         "methode": "open_pince",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -177,12 +166,11 @@
     }
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince",
-        "argument": []
+        "methode": "close_pince"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -191,11 +179,10 @@
     {
         "classe": "AX12_Pinces",
         "methode": "open_pince",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -203,17 +190,15 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince",
-        "argument": []
+        "methode": "open_pince"
     },
     {
         "classe": "AX12_Ascenseur",
         "methode": "lower",
-        "argument": []
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -221,12 +206,11 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince",
-        "argument": []
+        "methode": "close_pince"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -234,12 +218,11 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "elevate",
-        "argument": []
+        "methode": "elevate"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -247,13 +230,11 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower_for_plant",
-        "argument": []
+        "methode": "lower_for_plant"
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince_stepbystep",
-        "argument": []
+        "methode": "open_pince_stepbystep"
     },
     {
         "classe": "ComptagePoints",
@@ -264,7 +245,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -272,12 +253,11 @@
     },
     {
         "classe": "AX12_Ascenseur",
-        "methode": "lower",
-        "argument": []
+        "methode": "lower"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -285,12 +265,11 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince",
-        "argument": []
+        "methode": "open_pince"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -298,12 +277,11 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "close_pince",
-        "argument": []
+        "methode": "close_pince"
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -311,8 +289,7 @@
     },
     {
         "classe": "AX12_Pinces",
-        "methode": "open_pince",
-        "argument": []
+        "methode": "open_pince"
     },
     {
         "classe": "ComptagePoints",
@@ -323,7 +300,7 @@
     },
     {
         "classe": "Asserv",
-        "methode": "goto",
+        "methode": "Moove",
         "argument": [
             "1",
             "2"
@@ -332,7 +309,6 @@
     {
         "classe": "ComptagePoints",
         "methode": "pts_zone_finale",
-        "argument": []
     }
 }
 ]
