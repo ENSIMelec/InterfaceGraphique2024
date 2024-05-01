@@ -2,7 +2,6 @@ import tkinter as tk
 import os
 import shutil
 import subprocess
-from Globals_Variables import *
 
 import logging
 import logging.config
@@ -187,30 +186,37 @@ class StepsSelectionPage(tk.Frame):
         self.return_button = tk.Button(self.frame_with_image, text="Retour à la sélection de stratégie", font=("Helvetica", 13), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
         self.return_button.place(relx=0.22, rely=0.36, anchor="center")
 
+        self.process = None
+
         self.logger.info("Fin initialisation StepsSelectionPage")
 
     def run_program(self):
         if not self.program_running:
             # Exécute le programme externe (vous devez spécifier le chemin d'accès correct)
             self.logger.info("Lancement du programme principal")
-            subprocess.Popen(["python", "/home/pi/code_principal_2024/main_code.py"])
+            self.process = subprocess.Popen(["python", "/home/pi/code_principal_2024/main_code.py"])
             self.program_running = True
             self.status_indicator.config(text="Programme en cours", bg="#BCEE68")
+            # Désactiver le bouton de retour
+            self.return_button.config(state=tk.DISABLED)
+
 
     def stop_program(self):
         if self.program_running:
             self.logger.info("Arrêt du programme principal")
             # Arrête le programme externe
-            # Ici, vous devez implémenter la logique pour arrêter le programme en cours d'exécution.
-            # Cela peut nécessiter une communication spécifique avec le programme en cours d'exécution.
-            # Vous pouvez remplacer cette logique par celle adaptée à votre programme.
+            if self.process is not None:  # Vérifiez si un processus est en cours d'exécution
+                self.process.terminate()  # Arrêtez le processus
+                self.process = None  # Réinitialisez l'objet processus
             self.program_running = False
             self.status_indicator.config(text="Programme arrêté", bg="red")
+            # Réactiver le bouton de retour
+            self.return_button.config(state=tk.NORMAL)
 
 class MainApplication(tk.Tk):
     def __init__(self):
         # Charger la configuration de logging
-        logging.config.fileConfig(LOGS_CONF_PATH)
+        logging.config.fileConfig("/home/pi/code_principal_2024/logs.conf")
 
         # Créer un logger
         self.logger = logging.getLogger("Interface")
