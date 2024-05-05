@@ -169,6 +169,21 @@ class StepsSelectionPage(tk.Frame):
         self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 50), bg="#FCFCFC")
         self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
 
+        # Current Action Display
+        self.current_action_label = tk.Label(self.frame_with_image, text="Aucune action en cours", font=("Helvetica", 16), bg="white")
+        self.current_action_label.place(relx=0.5, rely=0.16, anchor="n")
+
+        # Initialization Indicators
+        self.init_indicators = tk.Frame(self.frame_with_image, bg="#222", relief="flat")
+        self.init_indicators.place(relx=0.5, rely=0.9, anchor="s", relwidth=1, height=30)
+        
+        # List of components
+        components = ["Asserv", "Lidar", "Ascenseur", "Panneau", "Pinces"]
+        self.indicators = {}
+        for i, component in enumerate(components):
+            self.indicators[component] = tk.Label(self.init_indicators, text=component, font=("Helvetica", 12), bg="red", fg="white", bd=2, relief="groove")
+            self.indicators[component].pack(side="left", expand=True, fill="both")
+        
         # Création du bouton GO pour exécuter le programme
         self.go_button = tk.Button(self.frame_with_image, text="GO", font=("Helvetica", 30), bg="#BCEE68", command=self.run_program, bd=2, relief="groove")
         self.go_button.place(relx=0.82, rely=0.20, anchor="center")
@@ -203,18 +218,22 @@ class StepsSelectionPage(tk.Frame):
     def stop_program(self):
         self.logger.info("Arrêt du programme principal")
         self.main.stop()
-            
+
     def retour(self):
         self.logger.info("Retour à la sélection de stratégie")
         self.return_callback
-        
+
     def mainStart(self):
         # Activer le bouton de stop
         self.stop_button.config(state=tk.NORMAL)
+        print("IIIIIIIIH")
         # Désactiver le bouton de retour
         self.return_button.config(state=tk.DISABLED)
+        print("OOOOOH")
         # Désactiver le bouton de start
         self.go_button.config(state=tk.DISABLED)
+        print("AAAAAH")
+        self.status_indicator.config(text="Programme en cours...", bg="green")
         
     def mainStop(self):
         # Réactiver le bouton de retour
@@ -224,38 +243,36 @@ class StepsSelectionPage(tk.Frame):
         # Désactiver le bouton de stop
         self.stop_button.config(state=tk.DISABLED)
         self.status_indicator.config(text="Programme arrêté", bg="red")
-    
+
     def waiting_jack(self):
         self.frame_with_image.config(bg="red")
-        for widget in self.frame_with_image.winfo_children():
-            widget.pack_forget()
         tk.Label(self.frame_with_image, text="Waiting Jack...", font=("Helvetica", 30), bg="red", fg="white").pack(expand=True)
 
     def jack_retired(self):
-        self.frame_with_image.config(bg="green")
-        for widget in self.frame_with_image.winfo_children():
-            widget.pack_forget()
         label = tk.Label(self.frame_with_image, text="Jack Retired", font=("Helvetica", 30), bg="green", fg="white")
         label.pack(expand=True)
-        self.after(2000, self.reset_view)
+
+    def update_current_action(self, action):
+        self.current_action_label.config(text=action)
+
+    def initialize_component(self, component_name):
+        if component_name in self.indicators:
+            self.indicators[component_name].config(bg="green")
 
     def asserv_initialized(self):
-        pass
+        self.initialize_component("Asserv")
 
     def lidar_initialized(self):
-        pass
+        self.initialize_component("Lidar")
 
     def AX12_Ascenceur_initialized(self):
-        pass
+        self.initialize_component("Ascenseur")
 
     def AX12_Panneau_initialized(self):
-        pass
+        self.initialize_component("Panneau")
 
     def AX12_Pinces_initialized(self):
-        pass
-
-    def current_action(self, action):
-        pass
+        self.initialize_component("Pinces")
 
     def update_score(self,score):
         self.points_counter_value.set(str(score))
@@ -265,6 +282,9 @@ class StepsSelectionPage(tk.Frame):
 
     def Y_update(self, Y):
         self.Y_label.config(text=f"Y: {Y}")
+
+    def time_update(self, time):
+        pass
 
 class MainApplication(tk.Tk):
     def __init__(self):
