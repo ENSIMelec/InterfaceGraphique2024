@@ -4,6 +4,7 @@ import sys
 sys.path.append('/home/pi/code_principal_2024')
 from Main import *
 from Globals_Variables import *
+from queue import SimpleQueue
 
 import logging
 import logging.config
@@ -133,9 +134,10 @@ class StepsSelectionPage(tk.Frame):
         
         self.logger = parent.logger
 
+        self.queue = SimpleQueue()
+
         self.strategy_path = strategy_path
         self.return_callback = return_callback
-        self.main = MainCode(json_path=strategy_path, app=self)
 
         self.configure(bg="white")
         self.pack(fill=tk.BOTH, expand=True)
@@ -208,12 +210,15 @@ class StepsSelectionPage(tk.Frame):
         # Désactiver le bouton stop
         self.stop_button.config(state=tk.DISABLED)
 
+        self.main = MainCode(json_path=strategy_path, interface=self)
+
         self.logger.info("Fin initialisation StepsSelectionPage")
 
     def run_program(self):
-        # Exécute le programme externe (vous devez spécifier le chemin d'accès correct)
         self.logger.info("Lancement du programme principal")
-        self.main.run()
+        program_thread = threading.Thread(target=self.main.run)  # Define the thread
+        program_thread.daemon = True 
+        program_thread.start() 
 
     def stop_program(self):
         self.logger.info("Arrêt du programme principal")
@@ -226,13 +231,10 @@ class StepsSelectionPage(tk.Frame):
     def mainStart(self):
         # Activer le bouton de stop
         self.stop_button.config(state=tk.NORMAL)
-        print("IIIIIIIIH")
         # Désactiver le bouton de retour
         self.return_button.config(state=tk.DISABLED)
-        print("OOOOOH")
         # Désactiver le bouton de start
         self.go_button.config(state=tk.DISABLED)
-        print("AAAAAH")
         self.status_indicator.config(text="Programme en cours...", bg="green")
         
     def mainStop(self):
@@ -252,7 +254,7 @@ class StepsSelectionPage(tk.Frame):
         label = tk.Label(self.frame_with_image, text="Jack Retired", font=("Helvetica", 30), bg="green", fg="white")
         label.pack(expand=True)
 
-    def update_current_action(self, action):
+    def update_action(self, action):
         self.current_action_label.config(text=action)
 
     def initialize_component(self, component_name):
@@ -283,13 +285,16 @@ class StepsSelectionPage(tk.Frame):
     def Y_update(self, Y):
         self.Y_label.config(text=f"Y: {Y}")
 
+    def Angle_update(self,angle):
+        pass
+
     def time_update(self, time):
         pass
 
 class MainApplication(tk.Tk):
     def __init__(self):
         # Charger la configuration de logging
-        logging.config.fileConfig(LOGS_CONF_PATH)
+        logging.config.fileConfig(LOGS_CONF_PATH,disable_existing_loggers=False)
 
         # Créer un logger
         self.logger = logging.getLogger("Interface")
@@ -297,9 +302,9 @@ class MainApplication(tk.Tk):
 
         self.title("Interface Graphique")
         self.geometry("800x480")
-        self.after(1000, lambda: self.wm_attributes('-fullscreen', 'true'))
         self.logger.info("Début initialisation TeamSelectionPage")
         self.team_selection_page = TeamSelectionPage(self, self.on_team_selected)
+        self.after(1000, lambda: self.wm_attributes('-fullscreen', 'true'))
         self.logger.info("Fin initialisation MainApplication")
 
     def on_team_selected(self, team):
