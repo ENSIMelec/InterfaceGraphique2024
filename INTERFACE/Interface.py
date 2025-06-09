@@ -16,6 +16,7 @@ def get_font_size(width, height, base_size=20):
     return max(size, 12)  # Minimum font size of 12
 
 class TeamSelectionPage(tk.Frame):
+    
     def __init__(self, parent, on_team_selected):
         
         super().__init__(parent)
@@ -53,11 +54,19 @@ class TeamSelectionPage(tk.Frame):
                                           bd=2, relief="groove")
         self.blue_team_button.place(relx=0.5, rely=0.5, anchor="center")
 
+        #Création du bouton Quitter l'interface
+        self.quit_button = tk.Button(self, text="Quitter",  font=("Helvetica", 15, "bold"),bg="#FF4444", fg="white", command=self.quit_app,bd=2, relief="groove")
+        self.quit_button.place(relx=0.5, rely=0.8, anchor="center")
+
         self.logger.info("Fin intitialisation TeamSelectionPage")
 
     def select_team(self, team):
         self.logger.info(f"Equipe sélectionnée: {team}")  
         self.on_team_selected(team)
+
+    def quit_app(self):
+        self.logger.info("Fermeture de l'application via bouton Quitter")
+        self.master.destroy() 
 
 class StrategySelectionPage(tk.Frame):
     def __init__(self, parent, team, return_callback, show_steps_selection):
@@ -74,7 +83,8 @@ class StrategySelectionPage(tk.Frame):
 
         # Chargement de l'image
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(script_dir, "/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/vinyle_table_2024_FINAL_v1.png")
+        image_path = os.path.join(script_dir, "/home/pi/code_principal_2024/InterfaceGraphique2024/INTERFACE/playmat_2025_FINAL.png")
+
         self.image = tk.PhotoImage(file=image_path)
 
         # Création du cadre pour le premier bloc avec l'image en arrière-plan
@@ -85,20 +95,34 @@ class StrategySelectionPage(tk.Frame):
         self.background_label = tk.Label(self.frame_with_image, image=self.image)
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-        # Création du cadre pour les boutons
-        self.frame_with_buttons = tk.Frame(self.frame_with_image, bd=2, relief="groove")  # Bleu marine
+        # Couleurs par équipe
         if self.team == "Jaune":
-            self.frame_with_buttons.configure(bg="#FFFF99")
-            self.frame_with_buttons.place(relx=0.05, rely=0.2, relwidth=0.4, relheight=0.7)
-            button_color = "#FFFF99"  # Jaune clair
+            strategy_path = '/home/pi/code_principal_2024/Stratégies/Jaune'
+            button_color = "#FFFF99"
+            button_bg = "#FFFF99"
+            x = 0.05
             return_button_side = "right"
-            selected_button_color = "#FFD700"  # Jaune foncé
+            selected_button_color = "#FFD700"
+
         elif self.team == "Bleue":
-            self.frame_with_buttons.configure(bg="#000080")
-            self.frame_with_buttons.place(relx=0.55, rely=0.2, relwidth=0.4, relheight=0.7)
-            button_color = "#99CCFF"  # Bleu pastel
+            strategy_path = '/home/pi/code_principal_2024/Stratégies/Bleu'
+            button_color = "#99CCFF"
+            button_bg = "#000080"
+            x=0.55
             return_button_side = "left"
-            selected_button_color = "#00008B"  # Bleu foncé
+            selected_button_color = "#00008B"
+
+        self.strategy_files = os.listdir(strategy_path)
+
+        max_buttons_per_col = 4
+        total_strategies = len(self.strategy_files)
+
+        relwidth = 0.4 if total_strategies <= max_buttons_per_col else 0.9
+
+        # Création du cadre pour les boutons
+        self.frame_with_buttons = tk.Frame(self.frame_with_image, bd=2, relief="groove")
+        self.frame_with_buttons.configure(bg=button_bg)
+        self.frame_with_buttons.place(relx=x, rely=0.2, relwidth=relwidth, relheight=0.7)
 
         # Création du titre de l'équipe sélectionnée
         self.team_title_label = tk.Label(self.frame_with_buttons, text=self.team, font=("Helvetica", 30, "bold"), bg=button_color)
@@ -106,24 +130,61 @@ class StrategySelectionPage(tk.Frame):
 
         self.buttons = []
 
-        self.strategy_files = os.listdir('/home/pi/code_principal_2024/Stratégies/')
         # Création des boutons de sélection de stratégie
-        for strategy_file in self.strategy_files:
-            button_text = f"{strategy_file[:-5]}"
-            button = tk.Button(self.frame_with_buttons, text=button_text, font=("Helvetica", 15, "bold"), command=lambda strategy_file=strategy_file: self.on_strategy_selected(strategy_file), bd=2, relief="groove")
-            button.configure(bg=button_color)  # Pas de bordure
-            button.pack(fill="both", expand=True, padx=20, pady=5)
-            self.buttons.append(button)
-       
-        # Création du bouton de retour à la page de sélection d'équipe  
-        self.return_button = tk.Button(self.frame_with_buttons, text="Retour à la sélection d'équipe", font=("Helvetica", 15), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
+        # if self.team == "Jaune":
+        #     self.strategy_files = os.listdir('/home/pi/code_principal_2024/Stratégies/Jaune')
+        #     for strategy_file in self.strategy_files:
+        #         button_text = f"{strategy_file[:-5]}"
+        #         button = tk.Button(self.frame_with_buttons, text=button_text, font=("Helvetica", 15, "bold"), command=lambda strategy_file=strategy_file: self.on_strategy_selected(strategy_file), bd=2, relief="groove")
+        #         button.configure(bg=button_color)  # Pas de bordure
+        #         button.pack(fill="both", expand=True, padx=20, pady=5)
+        #         self.buttons.append(button)
+        # elif self.team == "Bleue":
+        #     self.strategy_files = os.listdir('/home/pi/code_principal_2024/Stratégies/Bleu')
+        #     for strategy_file in self.strategy_files:
+        #         button_text = f"{strategy_file[:-5]}"
+        #         button = tk.Button(self.frame_with_buttons, text=button_text, font=("Helvetica", 15, "bold"), command=lambda strategy_file=strategy_file: self.on_strategy_selected(strategy_file), bd=2, relief="groove")
+        #         button.configure(bg=button_color)  # Pas de bordure
+        #         button.pack(fill="both", expand=True, padx=20, pady=5)
+        #         self.buttons.append(button)
 
-        self.return_button.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        
+
+        # Créer les deux colonnes si plus de 4 fichiers
+        if total_strategies > max_buttons_per_col:
+            left_frame = tk.Frame(self.frame_with_buttons, bg=button_color)
+            left_frame.pack(side="left", fill="both", expand=True, padx=5)
+
+            right_frame = tk.Frame(self.frame_with_buttons, bg=button_color)
+            right_frame.pack(side="right", fill="both", expand=True, padx=5)
+
+        else:
+            left_frame = self.frame_with_buttons
+            right_frame = None
+
+        for i,strategy_file in enumerate(self.strategy_files):
+            strategy_full_path = os.path.join(strategy_path, strategy_file)
+            button_text = f"{strategy_file[:-5]}"
+            target_frame = left_frame if i < max_buttons_per_col else right_frame
+            button = tk.Button(target_frame, text=button_text, font=("Helvetica", 15, "bold"), command=lambda sp=strategy_full_path: self.on_strategy_selected(sp), bd=2, relief="groove")
+            button.configure(bg=button_color)  # Pas de bordure
+            button.pack(fill="both", expand=True, padx=10, pady=5)
+            self.buttons.append(button)
+
+
+        
+        # Création du bouton de retour à la page de sélection d'équipe  
+        return_parent = right_frame if right_frame else self.frame_with_buttons
+        self.return_button = tk.Button(return_parent, text="Retour à la sélection d'équipe", font=("Helvetica", 15), bg="#FFDDC1", command=self.return_callback, bd=2, relief="groove")
+        self.return_button.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         self.logger.info("Fin initialisation StrategySelectionPage")
-
+    
+    
     def on_strategy_selected(self, strategy_path):
-        json_filename = f"/home/pi/code_principal_2024/Stratégies/{strategy_path}"
+        # json_filename = f"/home/pi/code_principal_2024/Stratégies/{strategy_path}"
+        json_filename = strategy_path
+
         self.logger.info(f"Stratégie sélectionnée: {json_filename} en couleur {self.team}")
         self.pack_forget()
         self.show_steps_selection(json_filename)
@@ -133,8 +194,18 @@ class StepsSelectionPage(tk.Frame):
         super().__init__(parent)
         
         self.logger = parent.logger
-
         self.queue = SimpleQueue()
+
+        self.jack_message_label = None
+    
+
+        # Bande fonctionnel afficahge point en haut en balnc
+        # self.label_score = tk.Label(self, text="Score : 0", font=("Arial", 14))
+        # self.label_score.pack(pady=10)
+
+        # self.label_details = tk.Label(self, text="", justify="left", anchor="w", font=("Arial", 10))
+        # self.label_details.pack(pady=5, fill="both", expand=True)
+
 
         self.strategy_path = strategy_path
         self.return_callback = return_callback
@@ -155,21 +226,38 @@ class StepsSelectionPage(tk.Frame):
         self.background_label = tk.Label(self.frame_with_image, image=self.image)
         self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-        # Création du bloc pour le nombre de points
-        self.points_block = tk.Frame(self.frame_with_image, bg="#7AC5CD", bd=2, relief="groove")
-        self.points_block.place(relx=0.5, rely=0.05, relwidth=0.2, relheight=0.1, anchor="n")
+        # Création du bloc pour le nombre de points dans le milieu du cadre du fons
+        self.points_block = tk.Frame(self, bg="#7AC5CD", bd=2, relief="groove")
+        self.points_block.place(relx=0.5, rely=0.5, relwidth=0.35, relheight=0.12, anchor="center")
+        self.points_block.lift()
+
+        # # Création du bloc pour le nombre de points en haut au dessus du bouton pour retourner au strategies
+        # self.points_block = tk.Frame(self.frame_with_image, bg="#7AC5CD", bd=2, relief="groove")
+        # self.points_block.place(relx=0.5, rely=0.05, relwidth=0.35, relheight=0.1, anchor="center")
 
         # Titre du bloc
-        self.points_label = tk.Label(self.points_block, text="Points", font=("Helvetica", 23, "bold"), bg="#FCFCFC")
-        self.points_label.pack(fill=tk.BOTH, padx=10, pady=5)
+        # self.points_label = tk.Label(self.points_block, text="Points", font=("Helvetica", 20, "bold"), bg="#FCFCFC")
+        # self.points_label.pack(fill=tk.BOTH, padx=10, pady=5)
 
-        # Variable pour stocker le nombre de points
+        # # Variable pour stocker le nombre de points
+        # self.points_counter_value = tk.StringVar()
+        # self.points_counter_value.set('57')  # Initialisation à 0
+
+        # # Compteur initialisé à 0
+        # self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 50), bg="#FCFCFC")
+        # self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
+
         self.points_counter_value = tk.StringVar()
-        self.points_counter_value.set('57')  # Initialisation à 0
+        self.points_counter_value.set("Points : 0")  # affichage initial
 
-        # Compteur initialisé à 0
-        self.points_counter = tk.Label(self.points_block, textvariable=self.points_counter_value, font=("Helvetica", 50), bg="#FCFCFC")
-        self.points_counter.pack(fill=tk.BOTH, padx=10, pady=5)
+        self.points_full_label = tk.Label(
+            self.points_block,
+            textvariable=self.points_counter_value,
+            font=("Helvetica", 20, "bold"),
+            bg="#FCFCFC"
+        )
+        self.points_full_label.pack(fill=tk.BOTH, padx=10, pady=5)
+
 
         # Current Action Display
         self.current_action_label = tk.Label(self.frame_with_image, text="Aucune action en cours", font=("Helvetica", 16), bg="white")
@@ -180,7 +268,7 @@ class StepsSelectionPage(tk.Frame):
         self.init_indicators.place(relx=0.5, rely=0.9, anchor="s", relwidth=1, height=30)
         
         # List of components
-        components = ["Asserv", "Lidar", "Ascenseur", "Panneau", "Pinces"]
+        components = ["Asserv", "Lidar", "Ascenseur", "Planche", "Pinces","Temps", "Comptage_pts"]
         self.indicators = {}
         for i, component in enumerate(components):
             self.indicators[component] = tk.Label(self.init_indicators, text=component, font=("Helvetica", 12), bg="red", fg="white", bd=2, relief="groove")
@@ -214,6 +302,16 @@ class StepsSelectionPage(tk.Frame):
 
         self.logger.info("Fin initialisation StepsSelectionPage")
 
+    # def mettre_a_jour_score(self, score, details):
+    #     print(f"[DEBUG UI] Appel mettre_a_jour_score avec score = {score}")
+
+    #     self.label_score.config(text=f"Score : {score}")
+    #     self.label_details.config(text=details)
+
+    def Comptage_pts_initialized(self):
+        print("[UI] Comptage de points initialisé")
+
+
     def run_program(self):
         self.logger.info("Lancement du programme principal")
         program_thread = threading.Thread(target=self.main.run)  # Define the thread
@@ -231,11 +329,17 @@ class StepsSelectionPage(tk.Frame):
     def mainStart(self):
         # Activer le bouton de stop
         self.stop_button.config(state=tk.NORMAL)
+        #Supprimer les messages xd'informations du jack
+        if self.jack_message_label:
+            self.jack_message_label.destroy()
+            self.jack_message_label = None
+        self.frame_with_image.config(bg="black")
         # Désactiver le bouton de retour
         self.return_button.config(state=tk.DISABLED)
         # Désactiver le bouton de start
         self.go_button.config(state=tk.DISABLED)
         self.status_indicator.config(text="Programme en cours...", bg="green")
+
         
     def mainStop(self):
         # Réactiver le bouton de retour
@@ -248,11 +352,22 @@ class StepsSelectionPage(tk.Frame):
 
     def waiting_jack(self):
         self.frame_with_image.config(bg="red")
-        tk.Label(self.frame_with_image, text="Waiting Jack...", font=("Helvetica", 30), bg="red", fg="white").pack(expand=True)
+        if self.jack_message_label:
+            self.jack_message_label.destroy()
+        self.jack_message_label = tk.Label(self.frame_with_image, text="Waiting Jack...", font=("Helvetica", 30), bg="red", fg="white")
+        self.jack_message_label.place(relx=0.5, rely=0.5, anchor="center")
 
     def jack_retired(self):
-        label = tk.Label(self.frame_with_image, text="Jack Retired", font=("Helvetica", 30), bg="green", fg="white")
-        label.pack(expand=True)
+        if self.jack_message_label:
+            self.jack_message_label.destroy()
+        self.jack_message_label = tk.Label(self.frame_with_image, text="Jack Retired", font=("Helvetica", 30), bg="green", fg="white")
+        self.jack_message_label.place(relx=0.5, rely=0.5, anchor="center")
+
+    def clear_jack_message(self):
+        if self.jack_message_label:
+            self.jack_message_label.destroy()
+            self.jack_message_label = None
+        self.frame_with_image.config(bg="black")
 
     def update_action(self, action):
         self.current_action_label.config(text=action)
@@ -270,14 +385,24 @@ class StepsSelectionPage(tk.Frame):
     def AX12_Ascenceur_initialized(self):
         self.initialize_component("Ascenseur")
 
-    def AX12_Panneau_initialized(self):
-        self.initialize_component("Panneau")
+    def AX12_Planche_initialized(self):
+        self.initialize_component("Planche")
 
     def AX12_Pinces_initialized(self):
         self.initialize_component("Pinces")
 
+    def Temps_initialized(self):
+        self.initialize_component("Temps")
+    
+    def Comptage_pts_initialized(self):
+        self.initialize_component("Comptage_pts")
+
     def update_score(self,score):
-        self.points_counter_value.set(str(score))
+        print(f"[DEBUG UI] Mise à jour score avec {score}")
+        def update():
+            self.points_counter_value.set(f"Points : {score}")
+
+        self.after(0, update)
 
     def X_update(self, X):
         self.X_label.config(text=f"X: {X}")

@@ -6,7 +6,8 @@ class StrategyEditor(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Éditeur de Stratégie")
-        self.geometry("1350x800")
+        #self.geometry("1350x800")
+        self.geometry("800x480")
 
         self.blocks = {
             "AX12_Ascenseur": ["initialize_motors", "elevate", "lower", "lower_for_plant"],
